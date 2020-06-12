@@ -30,7 +30,7 @@ class TrackList extends Component {
          const {tracks} = this.state
         console.log("tracks", tracks)
         return (
-            <Col className="col-sm-12 col-md-12 col-lg-7 pl-3">
+            <Col className="col-sm-12 col-md-12 col-lg-7 pl-3 tracks">
                 <ul className="list">
                     {tracks.map(track=> (
                         <li className="d-flex  mb-3 justify-content-between" >
