@@ -32,11 +32,11 @@ class Album extends Component {
         const {album} =this.state
         return (
             <Col className="d-flex flex-column align-items-center mb-3">
-                <Link>
+                <Link to={`/album/${album.id}`}>
                     <div className="albumsName"
                          onMouseEnter={this.handleMouseHover}
                          onMouseLeave={this.handleMouseHover} >
-                        <Image  src={album.cover} alt="..."
+                        <Image  src={album.cover_medium} alt="..."
                                className="img-thumbnail p-0 border-0 rounded-0"/>
                         {this.state.isHovering && <AiFillPlayCircle style={{fontSize: "2.5rem", position: "absolute", top:"40%", left:"40%", color: "white", zIndex:"20",}}/>}
                     </div>

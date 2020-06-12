@@ -27,7 +27,7 @@ export default [
         exact:false
     },
     {
-        path:'/album',
+        path:'/album/:albumId',
         layout: MainLayout ,
         component:AlbumPage,
         exact:false

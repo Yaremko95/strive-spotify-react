@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Row} from "react-bootstrap";
 import Album from "./Album";
-
+import uniqBy from 'lodash/uniqBy'
 
 class Gallery extends Component {
     constructor(props) {
@@ -12,13 +12,30 @@ class Gallery extends Component {
         }
     }
     componentDidMount() {
+        if(this.props.list) {
+            this.setState({
+                title:this.props.title,
+                list:this.props.list
+            })
+        }
+        if(this.props.fetchAlbums) {
+            this.props.fetchAlbums()
+        }
+
+    }
+  componentDidUpdate=(prevProps)=> {
+    if(prevProps.list!== this.props.list) {
+        let list = this.props.list.filter(item => item.artist.name='Queen')
+       let albums= list.map(album=>album.album)
+        let filteredAlbums =uniqBy(albums, "title")
+        console.log( uniqBy(albums, "title"))
         this.setState({
-            title:this.props.title,
-            list:this.props.list
+            list:filteredAlbums
         })
     }
-
+}
     render() {
+
         return (
             <Container style={{maxWidth:"1400px"}}>
                 <div className=" d-flex flex-wrap row">
