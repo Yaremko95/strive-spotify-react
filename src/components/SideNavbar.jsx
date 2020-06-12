@@ -12,6 +12,10 @@ function SideNavbar (props) {
             color: "#93a0b0",
             fontSize:" 1.1rem",
             textDecoration: "none",
+            "&:hover": {
+                color: "whitesmoke",
+
+            },
         },
         linkActive: {
             color: "whitesmoke",

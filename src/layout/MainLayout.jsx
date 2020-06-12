@@ -10,11 +10,7 @@ function MainLayout (props) {
 
     const useStyles = createUseStyles((theme) => ({
         body: {
-            backgroundImage:  `url(${image})` ,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-            backgroundPosition:"center",
+
             color: "whitesmoke",
             height:"100vh",
             paddingLeft:"0"
