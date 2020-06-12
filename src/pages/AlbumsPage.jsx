@@ -21,11 +21,14 @@ class AlbumsPage extends Component {
                 "x-rapidapi-key": "84d2e1bc2amsh0bcbc81dd32f547p1526bajsncbac98b453bc"
             }
         })
-         let albums = await response.json()
-         this.setState({
-             albums:albums.data
-         })
-         console.log(this.state.albums)
+         if(response.ok) {
+             let albums = await response.json()
+             this.setState({
+                 albums:albums.data
+             })
+             console.log(this.state.albums)
+         }
+
     }
 
     render() {
