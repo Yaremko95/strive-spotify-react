@@ -5,21 +5,21 @@ class TrackList extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            album:{}
+
+            tracks:[]
         }
     }
-    componentDidMount= ()=> {
+    componentWillMount= ()=> {
         //this.props.fetchAlbum()
         this.setState({
-            album:this.props.album
+            tracks:this.props.tracks
         })
-        console.log(this.state.album)
 
     }
     componentDidUpdate =(prevProps) =>{
-        if(prevProps.album!==this.props.album) {
+        if(prevProps.tracks!==this.props.tracks) {
             this.setState({
-                album:this.props.album
+                tracks:this.props.tracks
             })
 
         }
@@ -27,12 +27,12 @@ class TrackList extends Component {
 
     render() {
 
-         const {tracks} = this.state.album
-        console.log("tracks", this.state.album)
+         const {tracks} = this.state
+        console.log("tracks", tracks)
         return (
             <Col className="col-sm-12 col-md-12 col-lg-7 pl-3">
                 <ul className="list">
-                    {tracks.data.map(track=> (
+                    {tracks.map(track=> (
                         <li className="d-flex  mb-3 justify-content-between" >
                             <div className="d-flex flex-column">
                                 <span className='song-title'><i className="fa fa-music mr-2"></i>{track.title}</span>

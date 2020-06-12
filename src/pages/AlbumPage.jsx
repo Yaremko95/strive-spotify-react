@@ -8,7 +8,8 @@ class AlbumPage extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            album:{}
+            album:{},
+            tracks:[]
         }
     }
 
@@ -27,8 +28,10 @@ class AlbumPage extends Component {
         if(response.ok) {
             let album = await response.json()
             this.setState({
-                album:album
+                album:album,
+                tracks:album.tracks.data
             })
+            console.log(this.state.tracks)
 
         }
     }
@@ -41,7 +44,7 @@ class AlbumPage extends Component {
 
                 <Row className="row mb-5 mt-5">
                    <AlbumCover album={this.state.album}  />
-                   {/*<TrackList  album={this.state.album} />*/}
+                   <TrackList  tracks={this.state.tracks} />
                 </Row>
                 <div className="filter ml-5">
 
