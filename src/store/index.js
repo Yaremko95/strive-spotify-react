@@ -15,7 +15,9 @@ const initialState = {
   artists: [],
   playlists: [
     {
-      id: 1,
+      id: "1",
+      image:
+        "https://i.pinimg.com/originals/11/17/57/111757ad3dc8123c12f263ecc003b009.jpg",
       name: "playlist1",
       description: "something",
       songs: [],

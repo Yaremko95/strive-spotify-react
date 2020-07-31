@@ -20,8 +20,8 @@ function Track({
       likeSong(track.id);
     }
   };
-  const add = (playlistId, songId) => {
-    addToPlaylist(playlistId, songId);
+  const add = (playlistId, song) => {
+    addToPlaylist(playlistId, song);
   };
 
   return (
@@ -43,7 +43,7 @@ function Track({
               {playlists.map((playlist) => (
                 <Dropdown.Item
                   key={playlist.id}
-                  onClick={() => add(playlist.id, track.id)}
+                  onClick={() => add(playlist.id, track)}
                 >
                   {playlist.name}
                 </Dropdown.Item>

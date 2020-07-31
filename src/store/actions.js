@@ -30,9 +30,9 @@ export const updatePlaylist = (playlist) => ({
   payload: playlist,
 });
 
-export const addSongToPlaylist = (playlistId, songId) => ({
+export const addSongToPlaylist = (playlistId, song) => ({
   type: C.ADD_SONG_TO_PLAYLIST,
-  payload: songId,
+  payload: song,
   playlistId: playlistId,
 });
 
