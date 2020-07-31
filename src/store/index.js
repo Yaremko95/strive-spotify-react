@@ -5,6 +5,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   loading: false,
   error: null,
+  singleAlbum: {},
+
   songs: {
     list: [],
     liked: [],

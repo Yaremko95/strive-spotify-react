@@ -58,9 +58,23 @@ export const setError = (e) => ({
   type: C.SET_ERROR,
   payload: e,
 });
+export const setSingleAlbum = (album) => ({
+  type: C.SET_SINGLE_ALBUM,
+  payload: album,
+});
 
-export const fetchData = (endpoint, param, value, index) => (dispatch) => {
-  fetch(`${endpoint}${param}?q=${value}&index=${index}`, {
+// https://deezerdevs-deezer.p.rapidapi.com/search/track/title?q=${value}&index=${index}`
+// `https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${value}&index=${index}`
+// `https://deezerdevs-deezer.p.rapidapi.com/search/album?q=${value}&index=${index}`
+// `https://deezerdevs-deezer.p.rapidapi.com/album/${this.props.match.params.albumId}`
+export const fetchData = (endpoint, param, search = true, value, index, id) => (
+  dispatch
+) => {
+  let str = search
+    ? `${endpoint}search/${param}?q=${value}&index=${index}`
+    : `${endpoint + param}/${id}`;
+  console.log("str,", str);
+  fetch(str, {
     method: "GET",
     headers: {
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
@@ -69,8 +83,19 @@ export const fetchData = (endpoint, param, value, index) => (dispatch) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (param === "track") dispatch(setSongs(data.data));
-      else if (param === "album") dispatch(setAlbums(data.data));
-      else dispatch(setArtists(data.data));
+      console.log("data", data);
+      if (search) {
+        if (param === "track/title") dispatch(setSongs(data.data));
+        else if (param === "album") {
+          let filteredAlbums = data.data.filter((album) =>
+            album.title.toLowerCase().includes(`${value}`)
+          );
+          dispatch(setAlbums(filteredAlbums));
+        } else dispatch(setArtists(data.data));
+      } else {
+        console.log("!!!!!!!!!!!!!!!!!");
+        dispatch(setSingleAlbum(data));
+        dispatch(setSongs(data.tracks.data));
+      }
     });
 };

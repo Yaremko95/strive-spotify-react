@@ -7,24 +7,18 @@ export default (state = {}, action) => {
         ...state,
         songs: {
           ...state.songs,
-          songs: action.payload,
+          list: action.payload,
         },
       };
     case C.SET_ALBUMS:
       return {
         ...state,
-        albums: {
-          ...state.albums,
-          albums: action.payload,
-        },
+        albums: action.payload,
       };
     case C.SET_ARTISTS:
       return {
         ...state,
-        albums: {
-          ...state.albums,
-          albums: action.payload,
-        },
+        artists: action.payload,
       };
     case C.ADD_PLAYLIST:
       return {
@@ -127,6 +121,11 @@ export default (state = {}, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case C.SET_SINGLE_ALBUM:
+      return {
+        ...state,
+        singleAlbum: action.payload,
       };
 
     default:
