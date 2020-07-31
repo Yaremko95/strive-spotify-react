@@ -49,21 +49,21 @@ export default (state = {}, action) => {
         ],
       };
     case C.ADD_SONG_TO_PLAYLIST:
-      let playlistToAddSong = state.playlist.find(
+      let playlistToAddSong = state.playlists.find(
         (playlist) => playlist.id === action.playlistId
       );
-      let k = state.playlist.findIndex(
+      let k = state.playlists.findIndex(
         (playlist) => playlist.id === action.playlistId
       );
       return {
         ...state,
-        playlist: [
-          ...state.playlist.slice(0, k),
+        playlists: [
+          ...state.playlists.slice(0, k),
           {
             ...playlistToAddSong,
             songs: [...playlistToAddSong.songs, action.payload],
           },
-          ...state.playlist.slice(k + 1),
+          ...state.playlists.slice(k + 1),
         ],
       };
     case C.REMOVE_SONG_FROM_PLAYLIST:
