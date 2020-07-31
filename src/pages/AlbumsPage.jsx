@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import {Col} from "react-bootstrap";
 import AlbumJumbotron from "../components/AlbumJumbotron";
 import Gallery from "../components/Gallery";
-
+import {connect} from 'react-redux'
 class AlbumsPage extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            albums:[]
+            albums:[],
+
         }
+
     }
     componentDidMount() {
         this.fetchAlbums()
@@ -24,7 +26,8 @@ class AlbumsPage extends Component {
          if(response.ok) {
              let albums = await response.json()
              this.setState({
-                 albums:albums.data
+                 albums:albums.data,
+
              })
              console.log(this.state.albums)
          }
@@ -35,18 +38,12 @@ class AlbumsPage extends Component {
         return (
             <Col className=" col-md-9 col-lg-10 d-md-block p-0 artist-content" style={{backgroundColor:"#181818"}}>
                 <AlbumJumbotron />
-                <Gallery title={"Albums"} fetchAlbums={()=>this.fetchAlbums()} list={this.state.albums}/>
-                {/*<div className="container" style="max-width: 90%;">*/}
-                {/*    <h2 className="mb-2  " style="color:whitesmoke;">Album</h2>*/}
-                {/*    <div*/}
-                {/*        className="albums-container row row-cols-1 row-cols-md-2 row-cols-lg-6 justify-content-center align-items-start ">*/}
-
-                {/*    </div>*/}
-                {/*</div>*/}
-
+                <Gallery title={"Albums"} fetchAlbums={()=>this.fetchAlbums()} list={this.state.albums} />
             </Col>
         );
     }
 }
 
-export default AlbumsPage;
+export default connect(
+    state => ({...state})
+)(AlbumsPage);

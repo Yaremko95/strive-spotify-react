@@ -31,7 +31,7 @@ class Album extends Component {
     render() {
         const {album} =this.state
         return (
-            <Col className="d-flex flex-column align-items-center mb-3">
+            <>
                 <Link to={`/album/${album.id}`}>
                     <div className="albumsName"
                          onMouseEnter={this.handleMouseHover}
@@ -42,7 +42,7 @@ class Album extends Component {
                     </div>
                 </Link>
                 <span className="mt-1 text-center bolder">{album.title}</span>
-            </Col>
+           </>
         )
     }
 }
