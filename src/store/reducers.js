@@ -110,7 +110,7 @@ export default (state = {}, action) => {
         },
       };
 
-    case C.UNLIKE_SONGS:
+    case C.UNLIKE_SONG:
       return {
         ...state,
         songs: {
