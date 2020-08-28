@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
+import { routerMiddleware, push } from "react-router-redux";
+import { browserHistory } from "react-router-dom";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   loading: false,
   error: null,
   singleAlbum: {},
-
+  user: {},
   songs: {
     list: [],
     liked: [],

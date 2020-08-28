@@ -13,4 +13,5 @@ export default {
   UNLIKE_SONG: "UNLIKE_SONGS",
   IS_LOADING: "IS_LOADING",
   SET_ERROR: "SET_ERROR",
+  SET_USER: "SET_USER",
 };

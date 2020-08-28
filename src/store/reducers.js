@@ -2,6 +2,11 @@ import C from "./constants";
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case C.SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case C.SET_SONGS:
       return {
         ...state,
