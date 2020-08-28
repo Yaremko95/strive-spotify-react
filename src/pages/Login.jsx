@@ -44,14 +44,17 @@ const Login = (props) => {
             <span>To continue, log in to Spotify.</span>
           </Col>
           <Col xs={12} className="my-1 px-0">
-            <Button className="btn-fb rounded-pill w-100 text-uppercase d-flex justify-content-center align-content-center">
-              <LogoFacebook
-                color="white"
-                className="mr-2"
-                style={{ marginTop: "-2px" }}
-              />
-              Continue with Facebook
-            </Button>
+            <a href={`http://localhost:3001/users/fbLogin`}>
+              {" "}
+              <Button className="btn-fb rounded-pill w-100 text-uppercase d-flex justify-content-center align-content-center">
+                <LogoFacebook
+                  color="white"
+                  className="mr-2"
+                  style={{ marginTop: "-2px" }}
+                />
+                Continue with Facebook
+              </Button>
+            </a>{" "}
           </Col>
           <Col xs={12} className="my-1 px-0">
             <Button
