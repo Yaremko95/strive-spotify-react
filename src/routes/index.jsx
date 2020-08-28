@@ -6,6 +6,7 @@ import AlbumsPage from "../pages/AlbumsPage";
 import AlbumPage from "../pages/AlbumPage";
 import PlaylistPage from "../pages/PlaylistPage";
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 export default [
   {
@@ -42,6 +43,11 @@ export default [
     path: "/login",
 
     component: Login,
+    exact: false,
+  },
+  {
+    path: "/Signup",
+    component: Signup,
     exact: false,
   },
 ];

@@ -21,7 +21,7 @@ function App() {
               path={route.path}
               exact={route.exact}
               render={(props) => {
-                if (route.path === "/login")
+                if (route.path === "/login" || route.path === "/Signup")
                   return <route.component {...props} />;
                 else
                   return (
