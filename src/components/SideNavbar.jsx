@@ -126,10 +126,9 @@ function SideNavbar(props) {
                   SIGN UP
                 </Button>
               </Nav.Link>
-              <Nav.Link className="nav-item w-100 mb-2">
+              <Nav.Link className="nav-item w-100 mb-2" as={Link} to={`/login`}>
                 <Button
                   type="button"
-                  onClick="goToLogin()"
                   className="btn btn-secondary w-100 rounded-pill"
                   style={{
                     backgroundColor: "black",

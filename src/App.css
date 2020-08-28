@@ -406,3 +406,89 @@ body {
     flex-direction: column !important;
   }
 }
+
+
+#login-content .col-xs-12 {
+  width: 100%;
+}
+
+#login-content a {
+  color: #1db954
+}
+
+#login-content .btn-fb {
+  background-color:#3b5998;
+  color: white;
+}
+
+#login-content .btn-fb:hover {
+  background-color:#5170b4;
+}
+
+#login-content .btn-dark {
+  background-color: black;
+}
+
+#login-content .btn-dark:hover {
+  background-color: rgb(47, 47, 47);
+}
+
+.btn, .btn-outline-black, .btn-success, .btn-dark, .btn-primary, .btn-green {
+  font-family: "Circular", sans-serif;
+  padding: 0.85rem;
+  letter-spacing: 2px;
+  font-size: 0.87rem;
+  font-weight: 800;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-green {
+  background-color: rgb(32, 175, 79);
+  color: white;
+  border: none;
+}
+.btn-green:hover {
+  background-color: rgb(0, 203, 92);
+  color: white;
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 0.05rem rgb(32, 175, 79));
+}
+
+.no-hover:hover {
+  transform: none;
+  filter: none
+}
+
+.btn-rounded{
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  letter-spacing: 1.76px;
+  text-transform: uppercase;
+  border-radius: 500px;
+  -webkit-transition: all 33ms cubic-bezier(.3,0,0,1);
+  transition: all 33ms cubic-bezier(.3,0,0,1);
+  will-change: transform;
+  padding: 8px 34px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+.divider {
+  border-top: 1px solid #d9dadc;
+  display: block;
+  line-height: 1px;
+  margin: 15px 0;
+  position: relative;
+  text-align: center;
+}
+
+.divider .divider-title {
+  background: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 0 20px;
+  text-transform: uppercase;
+}

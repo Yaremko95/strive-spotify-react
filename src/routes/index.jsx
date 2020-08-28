@@ -5,6 +5,7 @@ import Search from "../pages/Search";
 import AlbumsPage from "../pages/AlbumsPage";
 import AlbumPage from "../pages/AlbumPage";
 import PlaylistPage from "../pages/PlaylistPage";
+import Login from "../pages/Login";
 
 export default [
   {
@@ -35,6 +36,12 @@ export default [
     path: "/playlist/:playlistId",
     layout: MainLayout,
     component: PlaylistPage,
+    exact: false,
+  },
+  {
+    path: "/login",
+
+    component: Login,
     exact: false,
   },
 ];
