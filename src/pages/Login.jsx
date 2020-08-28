@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import GreenBtn from "../components/buttons/GreenBtn";
 import Divider from "../components/Divider";
@@ -6,6 +6,8 @@ import LogoFacebook from "react-ionicons/lib/LogoFacebook";
 import LogoApple from "react-ionicons/lib/LogoApple";
 import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
+import { connect } from "react-redux";
+import { authenticate } from "../store/actions";
 
 const Login = (props) => {
   const useStyles = createUseStyles({
@@ -16,6 +18,11 @@ const Login = (props) => {
     },
   });
   const classes = useStyles();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const { login } = props;
+  const handleLogin = () => {
+    login(`http://localhost:3001/users`, "login", credentials);
+  };
   return (
     <>
       <Container>
@@ -69,6 +76,10 @@ const Login = (props) => {
               name="username"
               id="login-username"
               placeholder="Email address or username"
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
             />
             <input
               type="password"
@@ -76,6 +87,10 @@ const Login = (props) => {
               name="password"
               id="login-password"
               placeholder="Password"
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
             />
           </Col>
 
@@ -116,8 +131,9 @@ const Login = (props) => {
               variant="outline-secondary"
               className="rounded-pill w-100 text-uppercase"
               style={{ borderWidth: "2px" }}
+              onClick={handleLogin}
             >
-              Sign up for Spotify
+              Sign in for Spotify
             </Button>
           </Col>
 
@@ -151,4 +167,10 @@ const Login = (props) => {
     </>
   );
 };
-export default Login;
+export default connect(
+  (state) => ({ ...state }),
+  (dispatch) => ({
+    login: (endpoint, param, body) =>
+      dispatch(authenticate(endpoint, param, body)),
+  })
+)(Login);

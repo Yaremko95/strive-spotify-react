@@ -1,5 +1,6 @@
 import C from "./constants";
-
+import axios from "axios";
+import authAxios from "./authAxios";
 export const setSongs = (songs) => ({
   type: C.SET_SONGS,
   payload: songs,
@@ -62,11 +63,10 @@ export const setSingleAlbum = (album) => ({
   type: C.SET_SINGLE_ALBUM,
   payload: album,
 });
-
-// https://deezerdevs-deezer.p.rapidapi.com/search/track/title?q=${value}&index=${index}`
-// `https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${value}&index=${index}`
-// `https://deezerdevs-deezer.p.rapidapi.com/search/album?q=${value}&index=${index}`
-// `https://deezerdevs-deezer.p.rapidapi.com/album/${this.props.match.params.albumId}`
+export const setUser = (user) => ({
+  type: C.SET_USER,
+  payload: user,
+});
 export const fetchData = (endpoint, param, search = true, value, index, id) => (
   dispatch
 ) => {
@@ -93,9 +93,58 @@ export const fetchData = (endpoint, param, search = true, value, index, id) => (
           dispatch(setAlbums(filteredAlbums));
         } else dispatch(setArtists(data.data));
       } else {
-        console.log("!!!!!!!!!!!!!!!!!");
         dispatch(setSingleAlbum(data));
         dispatch(setSongs(data.tracks.data));
       }
     });
+};
+
+export const authenticate = (endpoint, param, body) => async (dispatch) => {
+  // console.log(endpoint);
+  // axios
+  //   .post(`${endpoint}/${param}`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     data: body,
+  //     withCredentials: true,
+  //   })
+  //   .then((res) => {
+  //     if ((res.status = "OK")) {
+  //       // window.location = process.env.REACT_APP_API_URL;
+  //       console.log(res);
+  //     }
+  //   });
+  const res = await axios(`${endpoint}/${param}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    data: body,
+    withCredentials: true,
+  });
+  console.log(res);
+  if (res.status === 200) {
+    // display an error
+    window.location = process.env.REACT_APP_API_URL;
+  }
+};
+
+export const authorize = () => async (dispatch) => {
+  try {
+    const res = await authAxios.get("/users/me", { withCredentials: true });
+    let user = {};
+    if (!res) {
+      const secondRes = await axios.get("/users/me", {
+        withCredentials: true,
+      });
+      user = secondRes.data;
+    } else {
+      user = res.data;
+    }
+    console.log(user);
+    dispatch(setUser(user));
+  } catch (error) {
+    console.log(error);
+  }
 };
