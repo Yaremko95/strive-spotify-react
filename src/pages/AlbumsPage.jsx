@@ -4,6 +4,7 @@ import AlbumJumbotron from "../components/AlbumJumbotron";
 import Gallery from "../components/Gallery";
 import { connect } from "react-redux";
 import { fetchData } from "../store/actions";
+import LoginModal from "../components/auth/LoginModal";
 class AlbumsPage extends Component {
   constructor(props) {
     super(props);
@@ -44,19 +45,21 @@ class AlbumsPage extends Component {
 
   render() {
     return (
-      <Col
-        className=" col-md-9 col-lg-10 d-md-block p-0 artist-content"
-        style={{ backgroundColor: "#181818" }}
-      >
-        <AlbumJumbotron />
-        <Gallery
-          title={"Albums"}
-          fetchAlbums={(endpoint, param, value, key) =>
-            this.props.fetchData(endpoint, param, value, key)
-          }
-          // list={this.props.albums}
-        />
-      </Col>
+      <>
+        <Col
+          className=" col-md-9 col-lg-10 d-md-block p-0 artist-content"
+          style={{ backgroundColor: "#181818" }}
+        >
+          <AlbumJumbotron />
+          <Gallery
+            title={"Albums"}
+            fetchAlbums={(endpoint, param, value, key) =>
+              this.props.fetchData(endpoint, param, value, key)
+            }
+            // list={this.props.albums}
+          />
+        </Col>
+      </>
     );
   }
 }

@@ -107,7 +107,7 @@ const Login = (props) => {
           </Col>
 
           <Col xs={12} sm={6} className="px-0 mt-3 mt-md-0">
-            <Link to="/home">
+            <Link to="/signup">
               <GreenBtn text="Sign up" />
             </Link>
           </Col>

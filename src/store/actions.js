@@ -126,7 +126,9 @@ export const authenticate = (endpoint, param, body) => async (dispatch) => {
   console.log(res);
   if (res.status === 200) {
     // display an error
-    window.location = process.env.REACT_APP_API_URL;
+    if (param === "signup") {
+      console.log(res);
+    } else window.location = process.env.REACT_APP_API_URL;
   }
 };
 

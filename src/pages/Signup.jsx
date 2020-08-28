@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Container, Row, Col, Image, Button, Form } from "react-bootstrap";
 import GreenBtn from "../components/buttons/GreenBtn";
 import Divider from "../components/Divider";
@@ -6,7 +6,8 @@ import LogoFacebook from "react-ionicons/lib/LogoFacebook";
 import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import { FaAmericanSignLanguageInterpreting } from "react-icons/fa";
-
+import { connect } from "react-redux";
+import { authenticate } from "../store/actions";
 
 const Signup = (props) => {
   const useStyles = createUseStyles({
@@ -17,6 +18,17 @@ const Signup = (props) => {
     },
   });
   const classes = useStyles();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    refreshTokens: [],
+  });
+  const { signup } = props;
+  const handleSignup = () => {
+    signup(`http://localhost:3001/users`, "signup", credentials);
+  };
   return (
     <>
       <Container>
@@ -34,15 +46,18 @@ const Signup = (props) => {
 
       <Container fluid className={classes.loginContent}>
         <Row>
-
           <Col xs={12} className="mt-3">
             <p
               className="text-muted disclaimer text-center"
-              style={{ fontSize: "2em" }} >
+              style={{ fontSize: "2em" }}
+            >
               Register for free and start listening.
             </p>
           </Col>
-          <Col xs={12} className="mt-3 mb-2 text-center font-weight-bold text-muted">
+          <Col
+            xs={12}
+            className="mt-3 mb-2 text-center font-weight-bold text-muted"
+          >
             <span>To continue, log in to Spotify.</span>
           </Col>
           <Col xs={12} className="my-1 px-0">
@@ -79,19 +94,18 @@ const Signup = (props) => {
             </p>
           </Col>
 
-
           <Col xs={12} className="mt-3">
             <p
               className="text-muted disclaimer text-center"
-              style={{ fontSize: "1em" }}>
+              style={{ fontSize: "1em" }}
+            >
               Or{" "}
-
             </p>
             <p
               className="text-muted disclaimer text-center"
-              style={{ fontSize: "2em" }}>
+              style={{ fontSize: "2em" }}
+            >
               Register by email{" "}
-
             </p>
           </Col>
 
@@ -99,13 +113,51 @@ const Signup = (props) => {
             <Form>
               <Form.Group controlId="formBasicEmail" className="text-muted">
                 <Form.Label>Your email address</Form.Label>
-                <Form.Control type="email" placeholder="Please enter your email address." />
-                <Form.Label className="mt-2">Confirm email address</Form.Label>
-                <Form.Control type="email" placeholder="Please enter your email address again." />
+                <Form.Control
+                  type="email"
+                  placeholder="Please enter your email address."
+                  value={credentials.email}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, email: e.target.value })
+                  }
+                />
+                {/*<Form.Label className="mt-2">Confirm email address</Form.Label>*/}
+                {/*<Form.Control*/}
+                {/*  type="email"*/}
+                {/*  placeholder="Please enter your email address again."*/}
+                {/*/>*/}
                 <Form.Label className="mt-2">Create a Password</Form.Label>
-                <Form.Control type="password" placeholder="Create a Password" />
-                <Form.Label className="mt-2">What is the display name?</Form.Label>
-                <Form.Control type="text" placeholder="Enter your profile name." />
+                <Form.Control
+                  type="password"
+                  placeholder="Create a Password"
+                  value={credentials.password}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, password: e.target.value })
+                  }
+                />
+                <Form.Label className="mt-2">What is the name?</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your profile name."
+                  value={credentials.firstName}
+                  onChange={(e) =>
+                    setCredentials({
+                      ...credentials,
+                      firstName: e.target.value,
+                    })
+                  }
+                />
+                <Form.Label className="mt-2">
+                  What is the display surname?
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your profile name."
+                  value={credentials.lastName}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, lastName: e.target.value })
+                  }
+                />
               </Form.Group>
 
               <Divider />
@@ -142,49 +194,48 @@ const Signup = (props) => {
               </Form.Row>
 
               <Divider />
-              {['checkbox'].map((type) => (
+              {["checkbox"].map((type) => (
                 <div className="mb-3">
-                  <Form.Check className=" text-muted"
-
+                  <Form.Check
+                    className=" text-muted"
                     inline
                     label="Male"
                     type={type}
                     id={`custom-inline-${type}-1`}
                   />
-                  <Form.Check className=" text-muted"
+                  <Form.Check
+                    className=" text-muted"
                     custom
                     inline
                     label="Female"
                     type={type}
                     id={`custom-inline-${type}-2`}
                   />
-                  <Form.Check className=" text-muted"
+                  <Form.Check
+                    className=" text-muted"
                     custom
                     inline
                     label="Non-binary"
                     type={type}
                     id={`custom-inline-${type}-2`}
                   />
-
                 </div>
               ))}
 
-              {['checkbox'].map((type) => (
+              {["checkbox"].map((type) => (
                 <div className="mb-3">
-
-                  <Form.Check className="ml-0 mt-2 d-flex  text-muted"
-
+                  <Form.Check
+                    className="ml-0 mt-2 d-flex  text-muted"
                     type={type}
                     label="Share your registration data with Spotify content providers for marketing purposes."
                   />
-                  <Form.Check className="ml-0 mt-2 d-flex text-muted"
-
+                  <Form.Check
+                    className="ml-0 mt-2 d-flex text-muted"
                     type={type}
                     label="I agree to the Spotify Terms of Service and Privacy Policy ."
                   />
                 </div>
               ))}
-
             </Form>
           </Col>
 
@@ -195,10 +246,13 @@ const Signup = (props) => {
           </Col>
 
           <Col xs={12} className="text-center mt-3">
-            <p className="text-muted"> Do you have an account?
+            <p className="text-muted">
+              {" "}
+              Do you have an account?
               <a
                 id="reset-password-link"
                 href="https://www.spotify.com/password-reset/"
+                onClick={handleSignup}
               >
                 Login.
               </a>
@@ -235,4 +289,10 @@ const Signup = (props) => {
     </>
   );
 };
-export default Signup;
+export default connect(
+  (state) => ({ ...state }),
+  (dispatch) => ({
+    signup: (endpoint, param, body) =>
+      dispatch(authenticate(endpoint, param, body)),
+  })
+)(Signup);
