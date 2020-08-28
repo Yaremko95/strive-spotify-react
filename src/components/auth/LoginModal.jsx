@@ -3,6 +3,7 @@ import { createUseStyles } from "react-jss";
 
 import ModalHoc from "./ModalHoc";
 import InputField from "./InputField";
+import ModalForm from "./ModalForm";
 
 function LoginModal(props) {
   const useStyles = createUseStyles({
@@ -22,8 +23,11 @@ function LoginModal(props) {
         <h2>Music for everyone</h2>
       </div>
       <div className={classes.elementContainer}>
-        <InputField placeholder={"Email"} />
-        <InputField placeholder={"Password"} />
+        <ModalForm>
+          <InputField placeholder={"Email"} name={"email"} />
+          <InputField placeholder={"Password"} name={"password"} />
+        </ModalForm>
+
         {/*<input placeholder={"Password"} />*/}
       </div>
     </ModalHoc>

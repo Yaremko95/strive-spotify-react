@@ -21,10 +21,8 @@ const styles = {
     },
   },
 };
-const InputField = withStyles(
-  styles
-)(({ classes, placeholder, value, handleChange }) => (
-  <input className={classes.input} placeholder={placeholder} />
+const InputField = withStyles(styles)(({ classes, ...rest }) => (
+  <input className={classes.input} {...rest} />
 ));
 
 export default InputField;
