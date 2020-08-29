@@ -17,6 +17,7 @@ function ModalForm(props) {
         })
       )}
       {props.login && <RememberCheckbox />}
+      <props.button value="Log in" />
     </>
   );
 }

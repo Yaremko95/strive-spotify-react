@@ -2,7 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 
 import ModalHoc from "./ModalHoc";
-import InputField from "./InputField";
+import InputField, { CustomButton } from "./InputField";
 import ModalForm from "./ModalForm";
 
 function LoginModal(props) {
@@ -23,7 +23,7 @@ function LoginModal(props) {
         <h2>Music for everyone</h2>
       </div>
       <div className={classes.elementContainer}>
-        <ModalForm login={true}>
+        <ModalForm login={true} button={CustomButton}>
           <InputField placeholder={"Email"} name={"email"} />
           <InputField placeholder={"Password"} name={"password"} />
         </ModalForm>

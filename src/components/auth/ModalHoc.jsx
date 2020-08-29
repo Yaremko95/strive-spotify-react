@@ -17,8 +17,8 @@ const ModalHoc = ({ children }) => {
       justifyContent: "center",
     },
     modal: {
-      width: "30%",
-      padding: "1rem 2.5rem",
+      width: "25%",
+      padding: "1rem 3rem",
       backgroundColor: "rgba(0,0,0)",
       borderRadius: "5px",
     },
