@@ -5,8 +5,15 @@ import HomeNavbar from "../components/HomeNavbar";
 import Gallery from "../components/Gallery";
 import throwbackthursday from "../data/throwbackthursday";
 import classifishe from "../data/classifishe";
-
+import ReactDOM from "react-dom";
 import Login from "../components/auth/LoginModal";
+
+class Modal extends React.Component {
+  render() {
+    return ReactDOM.createPortal(this.props.children, document.body);
+  }
+}
+
 function Home(props) {
   const useStyles = createUseStyles((theme) => ({
     main: {
@@ -18,9 +25,14 @@ function Home(props) {
     },
   }));
   const classes = useStyles();
+  const modal = (
+    <Modal>
+      <Login />
+    </Modal>
+  );
   return (
     <>
-      <Login />
+      {modal}
       <div className={"col-sm-9 col-md-9 col-lg-10 pb-sm-4 " + classes.main}>
         <HomeNavbar />
         <Gallery title={"#throwbackthursday"} list={throwbackthursday} />

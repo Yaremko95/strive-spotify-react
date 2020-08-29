@@ -2,12 +2,16 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { animated, Transition } from "react-spring/renderprops";
 import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import ReactDOM from "react-dom";
 
 const ModalHoc = ({ children }) => {
   const useStyles = createUseStyles({
     container: {
       position: "fixed",
-      zIndex: "100",
+      zIndex: "1000",
+      top: "0",
+      left: "0",
       height: "100vh",
       width: "100%",
       backgroundColor: "rgba(255, 255, 255, .1)",
@@ -18,16 +22,15 @@ const ModalHoc = ({ children }) => {
     },
     modal: {
       width: "25%",
-      padding: "1rem 3rem",
+      padding: "2.5rem 3rem",
       backgroundColor: "rgba(0,0,0)",
-      borderRadius: "5px",
+      borderRadius: "10px",
     },
     elementContainer: {
       width: "100%",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      padding: "1.5rem 0",
     },
   });
   const classes = useStyles();
@@ -77,7 +80,7 @@ const ModalHoc = ({ children }) => {
                 <Image
                   fluid
                   src={"/assets/logo-white.png"}
-                  style={{ width: "30%" }}
+                  style={{ width: "35%", marginBottom: "3rem" }}
                 />
               </div>
               {children}

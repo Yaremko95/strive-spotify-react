@@ -5,6 +5,9 @@ import Gallery from "../components/Gallery";
 import { connect } from "react-redux";
 import { fetchData } from "../store/actions";
 import LoginModal from "../components/auth/LoginModal";
+import Login from "../components/auth/LoginModal";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 class AlbumsPage extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +49,7 @@ class AlbumsPage extends Component {
   render() {
     return (
       <>
+        <Login />
         <Col
           className=" col-md-9 col-lg-10 d-md-block p-0 artist-content"
           style={{ backgroundColor: "#181818" }}

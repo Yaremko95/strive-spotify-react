@@ -1,6 +1,12 @@
 import React from "react";
-import InputField, { RememberCheckbox } from "./InputField";
-
+import InputField, {
+  BreakLine,
+  CustomButton,
+  RememberCheckbox,
+  withPropsChange,
+} from "./InputField";
+const LoginFbButton = withPropsChange(CustomButton);
+const LoginButton = withPropsChange(CustomButton);
 function ModalForm(props) {
   const [credentials, setCredentials] = React.useState({});
 
@@ -17,7 +23,13 @@ function ModalForm(props) {
         })
       )}
       {props.login && <RememberCheckbox />}
-      <props.button value="Log in" />
+      <LoginFbButton {...props.button} />
+      <BreakLine />
+      <LoginFbButton
+        value="Sign up with Facebook"
+        from={{ background: "rgba(59, 89, 153, 1)", color: "white" }}
+        to={{ background: "rgba(59, 89, 153, 1)", color: "white" }}
+      />
     </>
   );
 }
