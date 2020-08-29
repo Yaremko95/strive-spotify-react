@@ -18,7 +18,7 @@ const ModalHoc = ({ children }) => {
     },
     modal: {
       width: "30%",
-      padding: "2rem 2.5rem",
+      padding: "1rem 2.5rem",
       backgroundColor: "rgba(0,0,0)",
       borderRadius: "5px",
     },

@@ -20,9 +20,35 @@ const styles = {
       color: "rgb(136, 137, 140)",
     },
   },
+  checkboxTitle: {
+    color: "rgb(136, 137, 140)",
+    fontSize: "1.2rem",
+    marginTop: "1.5rem",
+    float: "left",
+  },
+  elementContainer: {
+    width: "90%",
+    position: "relative",
+  },
 };
 const InputField = withStyles(styles)(({ classes, ...rest }) => (
   <input className={classes.input} {...rest} />
+));
+
+export const RememberCheckbox = withStyles(styles)(({ classes, ...rest }) => (
+  <div className={classes.elementContainer}>
+    <h5 className={classes.checkboxTitle}>Remember</h5>
+    <input
+      type="checkbox"
+      name="remember"
+      id="btn-toggle-1"
+      className="btn-toggle btn-toggle-round"
+    />
+    <label
+      htmlFor="btn-toggle-1"
+      className={classes.btnToggleLabel + " " + classes.btnToggleRoundLabel}
+    />
+  </div>
 ));
 
 export default InputField;

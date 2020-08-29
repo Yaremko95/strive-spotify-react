@@ -23,7 +23,7 @@ function LoginModal(props) {
         <h2>Music for everyone</h2>
       </div>
       <div className={classes.elementContainer}>
-        <ModalForm>
+        <ModalForm login={true}>
           <InputField placeholder={"Email"} name={"email"} />
           <InputField placeholder={"Password"} name={"password"} />
         </ModalForm>

@@ -492,3 +492,71 @@ body {
   padding: 0 20px;
   text-transform: uppercase;
 }
+
+
+/** checkbox**/
+.btn-toggle {
+  position: absolute;
+
+  visibility: hidden;
+}
+.btn-toggle + label {
+  display: block;
+  position: relative;
+  float: right;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.btn-toggle-round + label {
+  width: 45px;
+  padding: 4px;
+  height: 25px;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: default;
+}
+input.btn-toggle-round + label:before,
+input.btn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.btn-toggle-round + label:before {
+  right: 1px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(200, 200, 200, 0.3);
+  border-radius: 10px;
+  transition: background 0.4s;
+}
+input.btn-toggle-round + label:after {
+  width: 20px;
+  background-color: rgb(136, 137, 140);
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s cubic-bezier(.50,.28,0.7,.8);
+}
+
+input.btn-toggle-round:active + label:after {
+  -webkit-animation: deformation 0.4s ease-in-out;
+}
+
+input.btn-toggle-round:hover + label:after {
+  background-color: rgb(250, 250, 250);
+}
+input.btn-toggle-round:checked + label:after {
+  background-color: rgb(250, 250, 250);
+}
+input.btn-toggle-round:checked + label:before {
+  background-color: rgb(100, 143, 0);
+  border: 2px solid rgb(100, 143, 0);
+
+}
+input.btn-toggle-round:checked + label:after {
+  margin-left: 30px;
+}
