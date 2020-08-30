@@ -31,8 +31,6 @@ const ModalHoc = ({ children, ...props }) => {
     },
   });
   const classes = useStyles();
-  // const [show, setShow] = React.useState(true);
-  // const { signUp, showSignUp } = props;
   const { show, setShow } = props;
 
   return (
@@ -77,7 +75,6 @@ const ModalHoc = ({ children, ...props }) => {
                 style={{ width: "35%", marginBottom: "3rem" }}
               />
             </div>
-            {/*{children(showSignUp)}*/}
             {children(show, setShow)}
           </animated.div>
         ))

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import image from "../assets/image.jpg";
 import HomeNavbar from "../components/HomeNavbar";
@@ -10,6 +10,7 @@ import Login from "../components/auth/LoginModal";
 import ModalPortal from "../components/auth/ModalPortal";
 import composedAuthHOC from "../components/auth/ModalPortal";
 import LoginModal from "../components/auth/LoginModal";
+import Cookies from "js-cookie";
 
 function Home(props) {
   const useStyles = createUseStyles((theme) => ({
@@ -22,16 +23,10 @@ function Home(props) {
     },
   }));
   const classes = useStyles();
-  const modal = (
-    <ModalPortal>
-      {/*<Login />*/}
-      {null}
-    </ModalPortal>
-  );
+
+  useEffect(() => {}, []);
   return (
     <>
-      {/*{modal}*/}
-      {/*<LoginModal />*/}
       <div
         className={"col-sm-9 col-md-9 col-lg-10 pb-sm-4 " + classes.main}
         aria-hidden={true}

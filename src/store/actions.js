@@ -52,8 +52,12 @@ export const unlikeSong = (id) => ({
   payload: id,
 });
 
-export const isLoading = () => ({
+export const isLoading = (value) => ({
   type: C.IS_LOADING,
+  payload: value,
+});
+export const isLoggedIn = () => ({
+  type: C.SET_LOGGED_IN,
 });
 export const setError = (e) => ({
   type: C.SET_ERROR,
@@ -100,21 +104,7 @@ export const fetchData = (endpoint, param, search = true, value, index, id) => (
 };
 
 export const authenticate = (endpoint, param, body) => async (dispatch) => {
-  // console.log(endpoint);
-  // axios
-  //   .post(`${endpoint}/${param}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     data: body,
-  //     withCredentials: true,
-  //   })
-  //   .then((res) => {
-  //     if ((res.status = "OK")) {
-  //       // window.location = process.env.REACT_APP_API_URL;
-  //       console.log(res);
-  //     }
-  //   });
+  dispatch(isLoading(true));
   const res = await axios(`${endpoint}/${param}`, {
     headers: {
       "Content-Type": "application/json",
@@ -126,14 +116,20 @@ export const authenticate = (endpoint, param, body) => async (dispatch) => {
   console.log(res);
   if (res.status === 200) {
     // display an error
-    if (param === "signup") {
-      console.log(res);
-    } else window.location = process.env.REACT_APP_API_URL;
+    alert("f");
+    dispatch(isLoggedIn());
+    dispatch(isLoading(false));
+    // dispatch(setUser(user));
+    // if (param === "signup") {
+    //   console.log(res);
+    // } else window.location = process.env.REACT_APP_API_URL;
   }
 };
 
 export const authorize = () => async (dispatch) => {
   try {
+    alert("h");
+    dispatch(isLoading(true));
     const res = await authAxios.get("/users/me", { withCredentials: true });
     let user = {};
     if (!res) {
@@ -145,8 +141,12 @@ export const authorize = () => async (dispatch) => {
       user = res.data;
     }
     console.log(user);
+    dispatch(isLoggedIn());
     dispatch(setUser(user));
+    dispatch(isLoading(false));
+    alert("w");
   } catch (error) {
     console.log(error);
+    dispatch(isLoading(false));
   }
 };

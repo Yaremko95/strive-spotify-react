@@ -5,11 +5,17 @@ import InputField, {
   RememberCheckbox,
   withPropsChange,
 } from "./InputField";
+import { connect } from "react-redux";
+import { authenticate } from "../../store/actions";
 const LoginFbButton = withPropsChange(CustomButton);
 const LoginButton = withPropsChange(CustomButton);
 function ModalForm(props) {
   const [credentials, setCredentials] = React.useState({});
-
+  const { login } = props;
+  const handleLogin = () => {
+    alert("ok");
+    login(`http://localhost:3001/users`, "login", credentials);
+  };
   return (
     <>
       {React.Children.map(props.children, (input) =>
@@ -23,7 +29,7 @@ function ModalForm(props) {
         })
       )}
       {props.login && <RememberCheckbox />}
-      <LoginFbButton {...props.button} />
+      <LoginButton {...props.button} onClick={handleLogin} />
       <BreakLine />
       <LoginFbButton
         value="Sign up with Facebook"
@@ -34,4 +40,11 @@ function ModalForm(props) {
   );
 }
 
-export default ModalForm;
+// export default ModalForm;
+export default connect(
+  (state) => ({ ...state }),
+  (dispatch) => ({
+    login: (endpoint, param, body) =>
+      dispatch(authenticate(endpoint, param, body)),
+  })
+)(ModalForm);

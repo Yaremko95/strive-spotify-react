@@ -5,7 +5,8 @@ import { routerMiddleware, push } from "react-router-redux";
 import { browserHistory } from "react-router-dom";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
-  loading: false,
+  loading: true,
+  loggedIn: false,
   error: null,
   singleAlbum: {},
   user: null,

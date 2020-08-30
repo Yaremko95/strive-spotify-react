@@ -120,7 +120,12 @@ export default (state = {}, action) => {
     case C.IS_LOADING:
       return {
         ...state,
-        loading: !state.loading,
+        loading: action.payload,
+      };
+    case C.SET_LOGGED_IN:
+      return {
+        ...state,
+        loggedIn: !state.loggedIn,
       };
     case C.SET_ERROR:
       return {

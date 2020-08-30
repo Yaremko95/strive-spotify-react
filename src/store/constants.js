@@ -14,4 +14,5 @@ export default {
   IS_LOADING: "IS_LOADING",
   SET_ERROR: "SET_ERROR",
   SET_USER: "SET_USER",
+  SET_LOGGED_IN: "SET_LOGGED_IN",
 };

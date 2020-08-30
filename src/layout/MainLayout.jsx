@@ -15,10 +15,10 @@ function MainLayout(props) {
     },
   }));
   const classes = useStyles();
-  const { authorize, user } = props;
-  useEffect(() => {
-    authorize();
-  }, []);
+  // const { authorize, user } = props;
+  // useEffect(() => {
+  //   authorize();
+  // }, []);
   return (
     <Container fluid className={classes.body}>
       <Row className={"w-100 ml-0 mr-0"}>
@@ -29,9 +29,4 @@ function MainLayout(props) {
   );
 }
 
-export default connect(
-  (state) => ({ ...state }),
-  (dispatch) => ({
-    authorize: () => dispatch(authorize()),
-  })
-)(MainLayout);
+export default connect((state) => ({ ...state }))(MainLayout);
