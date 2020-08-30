@@ -56,8 +56,9 @@ export const isLoading = (value) => ({
   type: C.IS_LOADING,
   payload: value,
 });
-export const isLoggedIn = () => ({
+export const isLoggedIn = (value) => ({
   type: C.SET_LOGGED_IN,
+  payload: value,
 });
 export const setError = (e) => ({
   type: C.SET_ERROR,
@@ -87,7 +88,6 @@ export const fetchData = (endpoint, param, search = true, value, index, id) => (
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("data", data);
       if (search) {
         if (param === "track/title") dispatch(setSongs(data.data));
         else if (param === "album") {
@@ -115,14 +115,8 @@ export const authenticate = (endpoint, param, body) => async (dispatch) => {
   });
   console.log(res);
   if (res.status === 200) {
-    // display an error
-
-    dispatch(isLoggedIn());
+    dispatch(isLoggedIn(true));
     dispatch(isLoading(false));
-    // dispatch(setUser(user));
-    // if (param === "signup") {
-    //   console.log(res);
-    // } else window.location = process.env.REACT_APP_API_URL;
   }
 };
 
@@ -139,8 +133,7 @@ export const authorize = () => async (dispatch) => {
     } else {
       user = res.data;
     }
-    console.log(user);
-    dispatch(isLoggedIn());
+    dispatch(isLoggedIn(true));
     dispatch(setUser(user));
     dispatch(isLoading(false));
   } catch (error) {

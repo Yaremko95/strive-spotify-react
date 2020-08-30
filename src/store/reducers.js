@@ -125,7 +125,7 @@ export default (state = {}, action) => {
     case C.SET_LOGGED_IN:
       return {
         ...state,
-        loggedIn: !state.loggedIn,
+        loggedIn: action.payload,
       };
     case C.SET_ERROR:
       return {
