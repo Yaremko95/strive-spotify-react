@@ -7,12 +7,9 @@ import throwbackthursday from "../data/throwbackthursday";
 import classifishe from "../data/classifishe";
 import ReactDOM from "react-dom";
 import Login from "../components/auth/LoginModal";
-
-class Modal extends React.Component {
-  render() {
-    return ReactDOM.createPortal(this.props.children, document.body);
-  }
-}
+import ModalPortal from "../components/auth/ModalPortal";
+import composedAuthHOC from "../components/auth/ModalPortal";
+import LoginModal from "../components/auth/LoginModal";
 
 function Home(props) {
   const useStyles = createUseStyles((theme) => ({
@@ -26,14 +23,19 @@ function Home(props) {
   }));
   const classes = useStyles();
   const modal = (
-    <Modal>
-      <Login />
-    </Modal>
+    <ModalPortal>
+      {/*<Login />*/}
+      {null}
+    </ModalPortal>
   );
   return (
     <>
-      {modal}
-      <div className={"col-sm-9 col-md-9 col-lg-10 pb-sm-4 " + classes.main}>
+      {/*{modal}*/}
+      {/*<LoginModal />*/}
+      <div
+        className={"col-sm-9 col-md-9 col-lg-10 pb-sm-4 " + classes.main}
+        aria-hidden={true}
+      >
         <HomeNavbar />
         <Gallery title={"#throwbackthursday"} list={throwbackthursday} />
         <Gallery title={"Classifiche"} list={classifishe} />
@@ -42,4 +44,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default composedAuthHOC(Home);

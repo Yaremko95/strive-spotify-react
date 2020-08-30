@@ -8,7 +8,7 @@ const initialState = {
   loading: false,
   error: null,
   singleAlbum: {},
-  user: {},
+  user: null,
   songs: {
     list: [],
     liked: [],
