@@ -28,14 +28,14 @@ function LoginModal(props) {
 
   return (
     <ModalHoc {...props}>
-      {(show, setShow) => (
+      {(show, setShow, toggle) => (
         <>
           <div className={classes.elementContainer}>
             <h2>Music for everyone</h2>
           </div>
           <div className={classes.elementContainer}>
             <ModalForm
-              login={true}
+              type={"login"}
               button={{
                 value: "Log in",
                 to: { background: "rgb(122, 189, 0)", color: "white" },
@@ -61,7 +61,7 @@ function LoginModal(props) {
                   textDecoration: "underline",
                   fontWeight: "400",
                 }}
-                onClick={() => setShow(false)}
+                onClick={() => toggle()}
               >
                 SIGN UP
               </LinkButton>

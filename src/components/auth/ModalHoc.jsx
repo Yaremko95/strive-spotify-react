@@ -31,7 +31,7 @@ const ModalHoc = ({ children, ...props }) => {
     },
   });
   const classes = useStyles();
-  const { show, setShow } = props;
+  const { show, setShow, toggle } = props;
 
   return (
     <Transition
@@ -41,16 +41,20 @@ const ModalHoc = ({ children, ...props }) => {
       from={{
         o: 0,
         xyz: [-20, 0, 1],
+        zIndex: 1000,
       }}
       enter={[
         {
           o: 1,
           xyz: [0, 0, 1],
+          zIndex: 2000,
+          delay: 200,
         },
       ]}
       leave={{
         o: 0,
         xyz: [0, 0, 0.5],
+        zIndex: 1000,
       }}
     >
       {(item) =>
@@ -66,6 +70,7 @@ const ModalHoc = ({ children, ...props }) => {
                 range: [0.0, 1, 1.25, 2],
                 output: [0, 1, 0, 0],
               }),
+              zIndex: props.zIndex,
             }}
           >
             <div className={classes.elementContainer}>
@@ -75,7 +80,7 @@ const ModalHoc = ({ children, ...props }) => {
                 style={{ width: "35%", marginBottom: "3rem" }}
               />
             </div>
-            {children(show, setShow)}
+            {children(show, setShow, toggle)}
           </animated.div>
         ))
       }

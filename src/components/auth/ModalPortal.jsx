@@ -7,18 +7,32 @@ import SignUpModal from "./SignUPModal";
 import { authorize, isLoading } from "../../store/actions";
 
 const ModalPortal = (props) => {
-  const [signUp, showSignUp] = React.useState(true);
+  const [signUp, showSignUp] = React.useState(false);
   const [login, showLogin] = React.useState(true);
-  useEffect(() => {
-    if (!signUp) {
-      showLogin(true);
-    }
-    if (!login) {
-      showSignUp(true);
-    }
-  }, [signUp, login]);
+  const toggle = () => {
+    showLogin(!login);
+    showSignUp(!signUp);
+  };
+  // useEffect(() => {
+  //   if (!login) {
+  //     showLogin(true);
+  //     showSignUp(false);
+  //   } else {
+  //     showLogin(false);
+  //     showSignUp(true);
+  //   }
+  //   // if (!login) {
+  //   //   showSignUp(true);
+  //   //   showLogin(false);
+  //   //   alert("login if");
+  //   // } else {
+  //   //   showSignUp(false);
+  //   //   showLogin(true);
+  //   //   alert("login else");
+  //   // }
+  // }, []);
   return ReactDOM.createPortal(
-    props.children(signUp, showSignUp, login, showLogin),
+    props.children(signUp, showSignUp, login, showLogin, toggle),
     document.body
   );
 };
@@ -33,7 +47,7 @@ const authHOC = (Component) => (props) => {
     <>
       {!loading && !loggedIn && (
         <ModalPortal>
-          {(signUp, showSignUp, login, showLogin) => (
+          {(signUp, showSignUp, login, showLogin, toggle) => (
             <div
               style={{
                 position: "fixed",
@@ -52,11 +66,13 @@ const authHOC = (Component) => (props) => {
               tabIndex={-1}
               role={"dialog"}
             >
-              {!login ? (
-                <SignUpModal show={signUp} setShow={showSignUp} />
-              ) : (
-                <LoginModal show={login} setShow={showLogin} />
-              )}
+              <LoginModal show={login} setShow={showLogin} toggle={toggle} />
+              <SignUpModal show={signUp} setShow={showSignUp} toggle={toggle} />
+              {/*{!login ? (*/}
+              {/*  <SignUpModal show={signUp} setShow={showSignUp} />*/}
+              {/*) : (*/}
+              {/*  <LoginModal show={login} setShow={showLogin} />*/}
+              {/*)}*/}
             </div>
           )}
         </ModalPortal>

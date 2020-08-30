@@ -116,7 +116,7 @@ export const authenticate = (endpoint, param, body) => async (dispatch) => {
   console.log(res);
   if (res.status === 200) {
     // display an error
-    alert("f");
+
     dispatch(isLoggedIn());
     dispatch(isLoading(false));
     // dispatch(setUser(user));
@@ -128,7 +128,6 @@ export const authenticate = (endpoint, param, body) => async (dispatch) => {
 
 export const authorize = () => async (dispatch) => {
   try {
-    alert("h");
     dispatch(isLoading(true));
     const res = await authAxios.get("/users/me", { withCredentials: true });
     let user = {};
@@ -144,7 +143,6 @@ export const authorize = () => async (dispatch) => {
     dispatch(isLoggedIn());
     dispatch(setUser(user));
     dispatch(isLoading(false));
-    alert("w");
   } catch (error) {
     console.log(error);
     dispatch(isLoading(false));

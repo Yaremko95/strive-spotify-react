@@ -11,10 +11,10 @@ const LoginFbButton = withPropsChange(CustomButton);
 const LoginButton = withPropsChange(CustomButton);
 function ModalForm(props) {
   const [credentials, setCredentials] = React.useState({});
-  const { login } = props;
+  const { login, type } = props;
   const handleLogin = () => {
     alert("ok");
-    login(`http://localhost:3001/users`, "login", credentials);
+    login(`http://localhost:3001/users`, type, credentials);
   };
   return (
     <>
@@ -28,7 +28,7 @@ function ModalForm(props) {
             }),
         })
       )}
-      {props.login && <RememberCheckbox />}
+      {type === "login" && <RememberCheckbox />}
       <LoginButton {...props.button} onClick={handleLogin} />
       <BreakLine />
       <LoginFbButton
