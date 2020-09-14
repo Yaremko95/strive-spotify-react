@@ -26,14 +26,14 @@ const ModalPortal = connect((state) => ({ toggleModal: state.toggleModal }))(
 );
 
 const authHOC = (Component) => (props) => {
-  const { user, auth, loggedIn, loading } = props;
+  const { user, auth, loading } = props;
   useEffect(() => {
     console.log(props);
     auth();
   }, []);
   return (
     <>
-      {!user && (
+      {!user && !loading && (
         <ModalPortal>
           {(signUp, login, toggle) => (
             <div
@@ -74,13 +74,11 @@ const composedAuthHOC = compose(
   connect(
     (state) => ({
       user: state.user,
-      loggedIn: state.loggedIn,
       loading: state.loading,
       toggleModal: state.toggleModal,
     }),
     (dispatch) => ({
-      auth: (endpoint, param, body) =>
-        dispatch(authorize(endpoint, param, body)),
+      auth: () => dispatch(authorize()),
     })
   ),
   authHOC

@@ -39,15 +39,4 @@ export default [
     component: PlaylistPage,
     exact: false,
   },
-  {
-    path: "/login",
-
-    component: LoginModal,
-    exact: false,
-  },
-  {
-    path: "/Signup",
-    component: Signup,
-    exact: false,
-  },
 ];

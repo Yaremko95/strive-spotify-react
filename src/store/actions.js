@@ -56,10 +56,7 @@ export const isLoading = (value) => ({
   type: C.IS_LOADING,
   payload: value,
 });
-export const isLoggedIn = (value) => ({
-  type: C.SET_LOGGED_IN,
-  payload: value,
-});
+
 export const setError = (e) => ({
   type: C.SET_ERROR,
   payload: e,
@@ -106,31 +103,6 @@ export const fetchData = (endpoint, param, search = true, value, index, id) => (
     });
 };
 
-export const authenticate = (param, body) => async (dispatch) => {
-  dispatch(isLoading(true));
-  const res = await axios(
-    `${process.env["REACT_APP_API_URL"]}/users/${param}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      data: body,
-      withCredentials: true,
-    }
-  );
-  console.log(res);
-  if (res.status === 200) {
-    if (param === "signUp") {
-      dispatch(toggleModal());
-    } else {
-      dispatch(isLoggedIn(true));
-    }
-
-    dispatch(isLoading(false));
-  }
-};
-
 export const authorize = () => async (dispatch) => {
   try {
     dispatch(isLoading(true));
@@ -143,12 +115,40 @@ export const authorize = () => async (dispatch) => {
       user = secondRes.data;
     } else {
       user = res.data;
+      console.log(user);
     }
     // dispatch(isLoggedIn(true));
-    // dispatch(setUser(user));
-    // dispatch(isLoading(false));
+    dispatch(setUser(user));
+    dispatch(isLoading(false));
   } catch (error) {
     console.log(error);
+    dispatch(isLoading(false));
+  }
+};
+export const authenticate = (param, body) => async (dispatch) => {
+  // dispatch(isLoading(true));
+  alert("here 3");
+  const res = await axios(
+    `${process.env["REACT_APP_API_URL"]}/users/${param}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      data: body,
+      withCredentials: true,
+    }
+  );
+
+  if (res.status === 200) {
+    if (param === "signUp") {
+      dispatch(toggleModal());
+    } else {
+      dispatch(authorize());
+    }
+
+    dispatch(isLoading(false));
+  } else {
     dispatch(isLoading(false));
   }
 };

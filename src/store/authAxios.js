@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const authAxios = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: process.env["REACT_APP_API_URL"],
 });
 
 //Add a response interceptor
@@ -26,11 +26,7 @@ authAxios.interceptors.response.use(
       originalRequest._retry = true;
       const refreshToken = Cookies.get("refreshToken");
       return axios
-        .post(
-          `http://localhost:3001/users/refreshToken`,
-          {},
-          { withCredentials: true }
-        )
+        .post(`/users/refreshToken`, {}, { withCredentials: true })
         .then((res) => {
           if (res.status === 200) {
             return Promise.resolve();
