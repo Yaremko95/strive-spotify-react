@@ -6,36 +6,24 @@ import { compose } from "redux";
 import SignUpModal from "./SignUPModal";
 import { authorize, isLoading } from "../../store/actions";
 
-const ModalPortal = (props) => {
-  const [signUp, showSignUp] = React.useState(false);
-  const [login, showLogin] = React.useState(true);
-  const toggle = () => {
-    showLogin(!login);
-    showSignUp(!signUp);
-  };
-  // useEffect(() => {
-  //   if (!login) {
-  //     showLogin(true);
-  //     showSignUp(false);
-  //   } else {
-  //     showLogin(false);
-  //     showSignUp(true);
-  //   }
-  //   // if (!login) {
-  //   //   showSignUp(true);
-  //   //   showLogin(false);
-  //   //   alert("login if");
-  //   // } else {
-  //   //   showSignUp(false);
-  //   //   showLogin(true);
-  //   //   alert("login else");
-  //   // }
-  // }, []);
-  return ReactDOM.createPortal(
-    props.children(signUp, showSignUp, login, showLogin, toggle),
-    document.body
-  );
-};
+const ModalPortal = connect((state) => ({ toggleModal: state.toggleModal }))(
+  (props) => {
+    const { toggleModal } = props;
+    const [signUp, showSignUp] = React.useState(true);
+    const [login, showLogin] = React.useState(false);
+    const toggle = () => {
+      showLogin(!login);
+      showSignUp(!signUp);
+    };
+    useEffect(() => {
+      toggle();
+    }, [toggleModal]);
+    return ReactDOM.createPortal(
+      props.children(signUp, login, toggle),
+      document.body
+    );
+  }
+);
 
 const authHOC = (Component) => (props) => {
   const { user, auth, loggedIn, loading } = props;
@@ -45,9 +33,9 @@ const authHOC = (Component) => (props) => {
   }, []);
   return (
     <>
-      {!loading && !loggedIn && (
+      {!user && (
         <ModalPortal>
-          {(signUp, showSignUp, login, showLogin, toggle) => (
+          {(signUp, login, toggle) => (
             <div
               style={{
                 position: "fixed",
@@ -66,8 +54,8 @@ const authHOC = (Component) => (props) => {
               tabIndex={-1}
               role={"dialog"}
             >
-              <LoginModal show={login} setShow={showLogin} toggle={toggle} />
-              <SignUpModal show={signUp} setShow={showSignUp} toggle={toggle} />
+              <LoginModal show={login} toggle={toggle} />
+              <SignUpModal show={signUp} toggle={toggle} />
               {/*{!login ? (*/}
               {/*  <SignUpModal show={signUp} setShow={showSignUp} />*/}
               {/*) : (*/}
@@ -88,6 +76,7 @@ const composedAuthHOC = compose(
       user: state.user,
       loggedIn: state.loggedIn,
       loading: state.loading,
+      toggleModal: state.toggleModal,
     }),
     (dispatch) => ({
       auth: (endpoint, param, body) =>

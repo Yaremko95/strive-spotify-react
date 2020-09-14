@@ -7,6 +7,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   loading: true,
   loggedIn: false,
+  toggleModal: true,
   error: null,
   singleAlbum: {},
   user: null,

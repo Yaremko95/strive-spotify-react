@@ -27,7 +27,7 @@ function SignUpModal(props) {
   const classes = useStyles();
   return (
     <ModalHoc {...props}>
-      {(show, setShow, toggle) => (
+      {(toggle) => (
         <>
           {/*<button onClick={() => toggle()}>Login</button>*/}
           <div className={classes.elementContainer + " text-center"}>
@@ -46,7 +46,7 @@ function SignUpModal(props) {
               <InputField placeholder={"Create password"} name={"password"} />
               <InputField
                 placeholder={"What should we call you?"}
-                name={"firstName"}
+                name={"username"}
               />
             </ModalForm>
           </div>

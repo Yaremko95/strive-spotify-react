@@ -4,6 +4,8 @@ import { createUseStyles } from "react-jss";
 import ModalHoc from "./ModalHoc";
 import InputField, { LinkButton } from "./InputField";
 import ModalForm from "./ModalForm";
+import { connect } from "react-redux";
+import { authenticate } from "../../store/actions";
 
 function LoginModal(props) {
   const useStyles = createUseStyles({
@@ -28,7 +30,7 @@ function LoginModal(props) {
 
   return (
     <ModalHoc {...props}>
-      {(show, setShow, toggle) => (
+      {(toggle) => (
         <>
           <div className={classes.elementContainer}>
             <h2>Music for everyone</h2>

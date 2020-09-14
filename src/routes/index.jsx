@@ -5,7 +5,7 @@ import Search from "../pages/Search";
 import AlbumsPage from "../pages/AlbumsPage";
 import AlbumPage from "../pages/AlbumPage";
 import PlaylistPage from "../pages/PlaylistPage";
-import Login from "../pages/Login";
+import LoginModal from "../components/auth/LoginModal";
 import Signup from "../pages/Signup";
 
 export default [
@@ -42,7 +42,7 @@ export default [
   {
     path: "/login",
 
-    component: Login,
+    component: LoginModal,
     exact: false,
   },
   {

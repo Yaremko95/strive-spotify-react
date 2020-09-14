@@ -137,6 +137,11 @@ export default (state = {}, action) => {
         ...state,
         singleAlbum: action.payload,
       };
+    case C.TOGGLE_MODAL:
+      return {
+        ...state,
+        toggleModal: !state.toggleModal,
+      };
 
     default:
       return state;

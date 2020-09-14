@@ -72,6 +72,9 @@ export const setUser = (user) => ({
   type: C.SET_USER,
   payload: user,
 });
+export const toggleModal = () => ({
+  type: C.TOGGLE_MODAL,
+});
 export const fetchData = (endpoint, param, search = true, value, index, id) => (
   dispatch
 ) => {
@@ -103,19 +106,27 @@ export const fetchData = (endpoint, param, search = true, value, index, id) => (
     });
 };
 
-export const authenticate = (endpoint, param, body) => async (dispatch) => {
+export const authenticate = (param, body) => async (dispatch) => {
   dispatch(isLoading(true));
-  const res = await axios(`${endpoint}/${param}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    data: body,
-    withCredentials: true,
-  });
+  const res = await axios(
+    `${process.env["REACT_APP_API_URL"]}/users/${param}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      data: body,
+      withCredentials: true,
+    }
+  );
   console.log(res);
   if (res.status === 200) {
-    dispatch(isLoggedIn(true));
+    if (param === "signUp") {
+      dispatch(toggleModal());
+    } else {
+      dispatch(isLoggedIn(true));
+    }
+
     dispatch(isLoading(false));
   }
 };
@@ -133,9 +144,9 @@ export const authorize = () => async (dispatch) => {
     } else {
       user = res.data;
     }
-    dispatch(isLoggedIn(true));
-    dispatch(setUser(user));
-    dispatch(isLoading(false));
+    // dispatch(isLoggedIn(true));
+    // dispatch(setUser(user));
+    // dispatch(isLoading(false));
   } catch (error) {
     console.log(error);
     dispatch(isLoading(false));

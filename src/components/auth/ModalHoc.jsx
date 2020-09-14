@@ -80,7 +80,7 @@ const ModalHoc = ({ children, ...props }) => {
                 style={{ width: "35%", marginBottom: "3rem" }}
               />
             </div>
-            {children(show, setShow, toggle)}
+            {children(toggle)}
           </animated.div>
         ))
       }

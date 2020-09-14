@@ -11,10 +11,10 @@ const LoginFbButton = withPropsChange(CustomButton);
 const LoginButton = withPropsChange(CustomButton);
 function ModalForm(props) {
   const [credentials, setCredentials] = React.useState({});
-  const { login, type } = props;
+  const { authenticate, type } = props;
   const handleLogin = () => {
     alert("ok");
-    login(`http://localhost:3001/users`, type, credentials);
+    authenticate(type, credentials);
   };
   return (
     <>
@@ -44,7 +44,7 @@ function ModalForm(props) {
 export default connect(
   (state) => ({ ...state }),
   (dispatch) => ({
-    login: (endpoint, param, body) =>
+    authenticate: (endpoint, param, body) =>
       dispatch(authenticate(endpoint, param, body)),
   })
 )(ModalForm);
